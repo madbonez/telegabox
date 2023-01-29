@@ -1,0 +1,17 @@
+{
+    "include": ["src/**/*.ts"],
+    "exclude": ["src/**/*.spec.ts"],
+    "compilerOptions": {
+        "moduleResolution": "node",
+        "target": "es2022",
+        "module": "CommonJS",
+        "preserveConstEnums": true,
+        "outDir": "dist",
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "typeRoots": [
+            "node_modules/@types",
+            "node_modules/@yandex-cloud/function-types/dist/src"
+        ]
+    }
+}

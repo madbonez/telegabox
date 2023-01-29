@@ -1,0 +1,50 @@
+@startuml name 
+actor User
+
+
+activate Browser
+User -> Browser: login
+note left: Вход на сайт и получение данных \nпользователя
+Browser --> Browser: token is null
+
+Browser -> YaOauthLogin: redirect 
+activate YaOauthLogin
+User -> YaOauthLogin: enter password
+YaOauthLogin -> Browser: redirect with code
+deactivate YaOauthLogin
+
+Browser -> TokenFunction: /token {code}
+activate TokenFunction
+TokenFunction -> YaOauth: /token {code, secret}
+activate YaOauth
+YaOauth --> TokenFunction: {Token}
+deactivate YaOauth
+TokenFunction --> Browser: access_token, refresh_token
+deactivate TokenFunction
+Browser -> Browser: save token into storage
+
+Browser -> ApiGW: /user-info
+activate ApiGW
+ApiGW -> AuthtorityFunction: check token is valid
+activate AuthtorityFunction
+AuthtorityFunction -> YaOauth: /check
+activate YaOauth
+YaOauth --> AuthtorityFunction: ok
+deactivate YaOauth
+AuthtorityFunction --> ApiGW: ok
+deactivate AuthtorityFunction
+
+
+ApiGW -> UserInfoFunction
+activate UserInfoFunction
+UserInfoFunction -> YaOauth: /info
+activate YaOauth
+YaOauth --> UserInfoFunction: UserObject
+deactivate YaOauth
+UserInfoFunction --> Browser: UserObject
+deactivate UserInfoFunction
+deactivate ApiGW
+Browser --> User: show avatar and name
+deactivate Browser
+
+@enduml

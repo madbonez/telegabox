@@ -1,0 +1,5 @@
+POST https://iam.api.cloud.yandex.net/iam/v1/tokens
+
+{
+    "yandexPassportOauthToken":"y0_AgAAAAAe8gGGAAkQEAAAAADa8cNVa6NrDip0TpC7GUWtp9-h_zdzmiA"
+}
