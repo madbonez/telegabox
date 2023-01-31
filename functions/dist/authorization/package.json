@@ -6,8 +6,8 @@
   "scripts": {
     "package": "node ./package.js",
     "build": "rimraf dist && tsc && npm run package",
-    "test:once": "ts-node functions/**/*.spec.ts",
-    "test": "nodemon --exec \"npm run test:once\" functions/**/*.ts"
+    "test:once": "ts-node src/**/*.spec.ts",
+    "test": "nodemon --exec \"npm run test:once\" src/**/*.ts"
   },
   "repository": {
     "type": "git",

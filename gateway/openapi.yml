@@ -1,0 +1,37 @@
+openapi: 3.0.0
+info:
+  title: Test API
+  version: 1.0.0
+servers:
+- url: https://d5d75os920e8oe6q9mdp.apigw.yandexcloud.net
+paths:
+  /token:
+    post:
+      summary: Get Oauth token by code
+      operationId: getToken
+      requestBody:
+          content:
+            'application/json':
+               schema:
+                 type: object
+                 properties:
+                   code: 
+                    type: string
+                 additionalProperties: false
+
+      responses:
+        '200':
+          description: Object with tokens
+          content:
+            'application/json':
+               schema:
+                 type: object
+                 properties:
+                   accessToken: 
+                    type: string
+                   refreshToken: 
+                    type: string 
+      x-yc-apigateway-integration:
+        type: cloud_functions
+        function_id: d4epbidlgeqjq9nlcu76
+        service_account_id: ajefhv2s2lhfrgadpcmj

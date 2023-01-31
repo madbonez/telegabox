@@ -14,9 +14,9 @@ provider "yandex" {
 resource "yandex_function" "get-token" {
     name               = "get-token"
     description        = "change yandex code to oauth token"
-    user_hash          = "get-token-0.0.1"
+    user_hash          = uuid()
     runtime            = "nodejs16"
-    entrypoint         = "index"
+    entrypoint         = "index.handler"
     memory             = "128"
     execution_timeout  = "10"
     service_account_id = "ajefhv2s2lhfrgadpcmj"
