@@ -1,4 +1,28 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.asd = void 0;
-exports.asd = 'asd';
+exports.handler = void 0;
+const axios_1 = __importDefault(require("axios"));
+const handler = async function (event, context) {
+    let response = {
+        isAuthorized: false,
+        context: {}
+    };
+    const result = await axios_1.default.get('https://login.yandex.ru/info?format=json', {
+        headers: {
+            'Authorization': `OAuth ${event.headers.Authorization?.replace('Bearer ', '')}`
+        }
+    })
+        .then(resp => resp.data)
+        .catch((err) => {
+        console.info('auth error with ', err);
+        return null;
+    });
+    if (result) {
+        response.isAuthorized = true;
+    }
+    return response;
+};
+exports.handler = handler;

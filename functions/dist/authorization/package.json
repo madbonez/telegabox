@@ -4,8 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "package": "node ./package.js",
-    "build": "rimraf dist && tsc && npm run package",
+    "pack": "node ./pack.js",
+    "build": "rimraf dist && tsc && npm run pack",
     "test:once": "ts-node src/**/*.spec.ts",
     "test": "nodemon --exec \"npm run test:once\" src/**/*.ts"
   },
