@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const clientId = '2c78397a07bb4082a9ce340ca688c0d7';
-    const clientSecret = 'ea652a6dafeb4ba28feb71cd6a5664aa';
+    document.querySelector('#enter').setAttribute('href', `https://oauth.yandex.ru/authorize?response_type=code&client_id=${clientId}`);
 
     const params = (new URL(document.location)).searchParams;
     const code = params.get('code');

@@ -47,10 +47,26 @@ resource "yandex_function" "authorization" {
     }
 }
 
+resource "yandex_function" "user-info" {
+    name               = "user-info"
+    description        = "user-info function"
+    user_hash          = uuid()
+    runtime            = "nodejs16"
+    entrypoint         = "index.handler"
+    memory             = "128"
+    execution_timeout  = "10"
+    service_account_id = "ajefhv2s2lhfrgadpcmj"
+    content {
+        zip_filename = "../functions/dist/user-info.zip"
+    }
+}
+
 data "template_file" "openapi" {
   template = "${file("../gateway/openapi.yml")}"
   vars = {
-    function_id = "${yandex_function.authorization.id}"
+    auth-function-id = "${yandex_function.authorization.id}"
+    get-token-function-id = "${yandex_function.get-token.id}"
+    user-info-function-id = "${yandex_function.user-info.id}"
   }
 }
 resource "yandex_api_gateway" "telegabox-api-gateway" {

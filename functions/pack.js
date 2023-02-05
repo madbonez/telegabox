@@ -43,3 +43,4 @@ function zipIt(folderName, outputDir) {
 
 zipIt('get-token', 'dist')
 zipIt('authorization', 'dist')
+zipIt('user-info', 'dist')

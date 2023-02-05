@@ -36,7 +36,7 @@ paths:
                     type: string 
       x-yc-apigateway-integration:
         type: cloud_functions
-        function_id: d4epbidlgeqjq9nlcu76
+        function_id: ${get-token-function-id}
         service_account_id: ajefhv2s2lhfrgadpcmj
   /dummy:
     get:
@@ -54,6 +54,20 @@ paths:
           'Content-Type': "text/plain"
         content:
           'text/plain': "hello dummy"
+  /user-info:
+    get:
+      summary: Get authenticated user info      
+      responses:
+        '200':
+          description: User Info Object
+          content:
+            'application/json':
+               schema:
+                 type: object
+      x-yc-apigateway-integration:
+        type: cloud_functions
+        function_id: ${user-info-function-id}
+        service_account_id: ajefhv2s2lhfrgadpcmj          
   /authorize:
     get:
       summary: Authorized operation with http bearer security scheme
@@ -69,7 +83,7 @@ paths:
                    isAuthorized: 
                     type: boolean
                    context: 
-                    type: object 
+                    type: object
       x-yc-apigateway-integration:
         type: dummy
         content:
@@ -85,7 +99,7 @@ components:
       bearerFormat: JWT
       x-yc-apigateway-authorizer:
         type: function
-        function_id: ${function_id}
+        function_id: ${auth-function-id}
         tag: "$latest"
         service_account_id: ajefhv2s2lhfrgadpcmj
         authorizer_result_ttl_in_seconds: 300
