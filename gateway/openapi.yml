@@ -38,11 +38,12 @@ paths:
         type: cloud_functions
         function_id: ${get-token-function-id}
         service_account_id: ajefhv2s2lhfrgadpcmj
-  /dummy:
-    get:
+    options:
+      security: 
+        - {}
       responses:
         '200':
-          description: dummy
+          description: cors
           content:
             'text/plain':
               schema:
@@ -51,9 +52,12 @@ paths:
         type: dummy
         http_code: 200
         http_headers:
+          'Access-Control-Allow-Origin': "*"
+          'Access-Control-Allow-Headers': "*"
+          'Access-Control-Allow-Methods': "*"
           'Content-Type': "text/plain"
         content:
-          'text/plain': "hello dummy"
+          'text/plain': ""
   /user-info:
     get:
       summary: Get authenticated user info      
@@ -68,6 +72,26 @@ paths:
         type: cloud_functions
         function_id: ${user-info-function-id}
         service_account_id: ajefhv2s2lhfrgadpcmj          
+    options:
+      security: 
+        - {}
+      responses:
+        '200':
+          description: cors
+          content:
+            'text/plain':
+              schema:
+                type: "string"
+      x-yc-apigateway-integration:
+        type: dummy
+        http_code: 200
+        http_headers:
+          'Access-Control-Allow-Origin': "*"
+          'Access-Control-Allow-Headers': "*"
+          'Access-Control-Allow-Methods': "*"
+          'Content-Type': "text/plain"
+        content:
+          'text/plain': ""        
   /authorize:
     get:
       summary: Authorized operation with http bearer security scheme
