@@ -16,7 +16,7 @@ export type UserReducers<T> = {
 }
 
 export const getUserInfo = createAsyncThunk('user/getToken', async (_, { getState }) => {
-  return await http('https://d5d0786vba0ja5ed6top.apigw.yandexcloud.net/user-info', (getState() as RootState).token.token);
+  return await http('https://d5d77nh9147b9h84vju6.apigw.yandexcloud.net/user-info', (getState() as RootState).token.token);
 });
 
 export const userSlice = createSlice<UserState, UserReducers<UserState>>({

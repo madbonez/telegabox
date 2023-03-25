@@ -26,7 +26,7 @@ export function logout() {
 }
 
 export const getToken = createAsyncThunk('token/getToken', async (code: string) => {
-  return await http('https://d5d0786vba0ja5ed6top.apigw.yandexcloud.net/token', null, 'POST', {code});
+  return await http('https://d5d77nh9147b9h84vju6.apigw.yandexcloud.net/token', null, 'POST', {code});
 });
 
 export const tokenSlice = createSlice<TokenState, TokenReducers<TokenState>>({
